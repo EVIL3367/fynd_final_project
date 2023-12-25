@@ -5,6 +5,7 @@ const Port = process.env.Port || 8000;
 const cors = require("cors")
 const mongoose=require('mongoose');
 const articleData = require('./model');
+const router=express.Router()
  const articlesinfo ={
     "learn-react": {
         comments:[],
@@ -51,7 +52,7 @@ mongoose.connect("mongodb+srv://shivaevilking:1234shivansh@cluster0.lhsukan.mong
     
     
 //})
-app.post('/api/articles/:name/add-comments', async(req,res) => {
+router.post('/api/articles/:name/add-comments', async(req,res) => {
     const {username, text} = req.body;
     const articleName = req.params.name;
     console.log(req.body);
@@ -81,5 +82,5 @@ const upatedArticle =await articleData.findOne({ name: articleName});
    
 })
 
-
+app.use(router);
 app.listen(Port, () => console.log(`server started at port ${Port}`))
