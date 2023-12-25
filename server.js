@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const dotenv=require('dotenv');
 const {MongoClient} = require("mongodb");
 const Port = process.env.Port || 8000;
 const cors = require("cors")
@@ -18,7 +19,9 @@ const router=express.Router()
     },
  }
 app.use(cors())
-app.use(express.json({ extended: false}));
+app.use(express.json());
+//database connection
+dotenv.config();
 //const withDB = async(operation,res) => {
     mongoose.set('strictQuery', false)
 mongoose.connect("mongodb+srv://shivaevilking:1234shivansh@cluster0.lhsukan.mongodb.net/?retryWrites=true&w=majority")
